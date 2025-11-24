@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class Room extends Model
+{
+    protected $guarded = ['id'];
+
+    // Satu Ruangan milik satu Unit
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+}
