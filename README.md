@@ -1,135 +1,131 @@
-# SIM Inventaris (Sistem Informasi Manajemen Inventaris)
+# SIM INVENTARIS KAMPUS (SIM-IV)
 
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Alpine.js](https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![DomPDF](https://img.shields.io/badge/PDF_Reporting-DomPDF-red?style=for-the-badge)
 
-## 📋 Deskripsi Project
+## 📖 Tentang Proyek
 
-**SIM Inventaris** adalah aplikasi berbasis web yang dibangun menggunakan framework Laravel untuk mempermudah pengelolaan aset dan inventaris. Aplikasi ini dirancang untuk menangani berbagai aspek manajemen aset, mulai dari pendataan aset tetap, barang habis pakai (BHP), transaksi stok, peminjaman aset, hingga pelaporan.
+**SIM Inventaris Kampus** adalah aplikasi berbasis web yang dirancang untuk mengelola siklus hidup aset (*Asset Lifecycle*) di lingkungan universitas. Sistem ini menangani pencatatan aset dari hulu (Pengajuan/Akuisisi) hingga hilir (Pelaporan & Penghapusan).
 
-Sistem ini cocok digunakan oleh instansi atau organisasi yang membutuhkan pencatatan inventaris yang terstruktur, transparan, dan mudah diakses.
+Aplikasi ini membedakan secara tegas antara **Aset Tetap** (Laptop, Proyektor, Kendaraan) dengan **Barang Habis Pakai/BHP** (ATK, Obat, Bahan Praktik) menggunakan logika *Batch* dan *FIFO*.
+
+---
 
 ## 🚀 Fitur Utama
 
-Aplikasi ini memiliki berbagai modul fitur yang lengkap:
+### 1. 📊 Dashboard Eksekutif
+* **Ringkasan Real-time:** Total nilai aset, jumlah peminjaman aktif, dan stok kritis.
+* **Early Warning System:** Notifikasi tabel untuk barang yang akan kadaluarsa dan peminjam yang terlambat.
 
-1.  **Dashboard**: Ringkasan statistik inventaris.
-2.  **Data Master**: Manajemen Unit, Ruangan, dan Sumber Dana.
-3.  **Inventaris Aset Tetap**:
-    -   Manajemen Kategori Aset.
-    -   Pencatatan Barang Induk dan Detail Aset (Laptop, Proyektor, Meja, dll).
-4.  **Barang Habis Pakai (BHP)**:
-    -   Manajemen Obat, ATK, dan barang konsumsi lainnya.
-    -   Pencatatan Batch dan Detail Stok.
-5.  **Transaksi BHP**:
-    -   Pencatatan Stok Masuk dan Stok Keluar.
-6.  **Peminjaman Aset (Sirkulasi)**:
-    -   Pencatatan Peminjaman dan Pengembalian Aset.
-7.  **Pengadaan (Akuisisi)**:
-    -   Pengajuan dan Persetujuan Pengadaan Barang baru.
-8.  **Laporan (Reporting)**:
-    -   Cetak Laporan Aset, Stok BHP, dan Peminjaman (PDF Support).
-9.  **Manajemen User**: Pengelolaan pengguna aplikasi.
+### 2. 🛍️ Akuisisi (Procurement)
+* Manajemen usulan pengadaan barang dari User/Staff.
+* Sistem persetujuan (Approval) bertingkat oleh Admin.
+* Integrasi otomatis: Usulan yang disetujui dapat langsung diproses menjadi stok gudang.
+
+### 3. 💻 Manajemen Aset Tetap (Fixed Assets)
+* **Parent-Child Structure:** Memisahkan data induk (Nama Barang) dengan unit fisik (Kode Unik).
+* Pelacakan status ketersediaan (Tersedia, Dipinjam, Rusak, Maintenance).
+* Pencatatan lokasi (Ruangan) dan sumber dana.
+
+### 4. 💊 Manajemen Barang Habis Pakai (Consumables)
+* **Batch System:** Stok dicatat per batch kedatangan untuk melacak tanggal kadaluarsa (*Expiry Date*).
+* **Kartu Stok Digital:** Riwayat transaksi masuk (Debit) dan keluar (Kredit) yang transparan.
+
+### 5. 🔄 Sirkulasi & Transaksi
+* **Peminjaman Aset:** Validasi otomatis (barang rusak/sedang dipinjam tidak bisa dipinjamkan).
+* **Penggunaan BHP:** Pencatatan pengambilan stok untuk keperluan operasional.
+
+### 6. 📄 Pelaporan (Reporting)
+* Cetak laporan otomatis ke format **PDF**.
+* Laporan Aset per Ruangan, Laporan Sisa Stok BHP, dan Laporan Peminjaman Aktif.
+
+---
 
 ## 🛠️ Teknologi yang Digunakan
 
-Project ini dibangun dengan teknologi modern untuk memastikan performa dan kemudahan pengembangan:
+* **Backend Framework:** Laravel 12
+* **Language:** PHP 8.3
+* **Database:** MySQL
+* **Frontend:** Blade Templates + Tailwind CSS (Flowbite)
+* **Authentication:** Laravel Breeze
+* **PDF Generator:** Barryvdh DomPDF
 
--   **Backend Framework:** [Laravel 12](https://laravel.com)
--   **Language:** PHP ^8.2
--   **Frontend:** Blade Templates
--   **Styling:** [Tailwind CSS](https://tailwindcss.com)
--   **Interactivity:** [Alpine.js](https://alpinejs.dev)
--   **Build Tool:** Vite
--   **Database:** MySQL / MariaDB
--   **PDF Generation:** barryvdh/laravel-dompdf
+---
 
-## 📦 Cara Instalasi
+## 📸 Tangkapan Layar (Screenshots)
 
-Ikuti langkah-langkah berikut untuk menjalankan project ini di komputer lokal Anda:
+| Dashboard | Peminjaman |
+|:---:|:---:|
+| ![Dashboard](https://placehold.co/600x400?text=Screenshot+Dashboard) | ![Peminjaman](https://placehold.co/600x400?text=Screenshot+Peminjaman) |
 
-### Prasyarat
+| Stok BHP | Laporan PDF |
+|:---:|:---:|
+| ![Stok](https://placehold.co/600x400?text=Screenshot+Stok+BHP) | ![Laporan](https://placehold.co/600x400?text=Screenshot+Laporan+PDF) |
 
-Pastikan Anda telah menginstal:
+---
 
--   PHP >= 8.2
--   Composer
--   Node.js & NPM
--   MySQL
+## ⚙️ Instalasi & Pengaturan
 
-### Langkah-langkah
+Ikuti langkah ini untuk menjalankan proyek di komputer lokal:
 
-1.  **Clone Repository**
-
+1.  **Clone Repositori**
     ```bash
-    git clone https://github.com/username/sim_inventaris.git
-    cd sim_inventaris
+    git clone [https://github.com/username/sim-inventaris.git](https://github.com/username/sim-inventaris.git)
+    cd sim-inventaris
     ```
 
-2.  **Install Dependencies (Backend)**
-
+2.  **Install Dependensi**
     ```bash
     composer install
-    ```
-
-3.  **Install Dependencies (Frontend)**
-
-    ```bash
     npm install
     ```
 
-4.  **Konfigurasi Environment**
-    Salin file `.env.example` menjadi `.env`:
-
+3.  **Konfigurasi Environment**
+    Salin file `.env.example` menjadi `.env` dan sesuaikan database.
     ```bash
     cp .env.example .env
-    ```
-
-    Buka file `.env` dan sesuaikan konfigurasi database Anda:
-
-    ```env
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=nama_database_anda
-    DB_USERNAME=root
-    DB_PASSWORD=
-    ```
-
-5.  **Generate Application Key**
-
-    ```bash
     php artisan key:generate
     ```
 
-6.  **Migrasi Database & Seeder**
-    Jalankan migrasi untuk membuat tabel dan mengisi data awal (jika ada):
-
+4.  **Setup Database**
+    Pastikan database MySQL `sim_inventaris_db` sudah dibuat, lalu jalankan migrasi dan seeder.
     ```bash
-    php artisan migrate --seed
+    php artisan migrate:fresh --seed --seeder=UserSeeder
+    php artisan db:seed --class=CategorySeeder
+    php artisan db:seed --class=MasterDataSeeder
     ```
 
-7.  **Jalankan Development Server**
-    Buka dua terminal terpisah.
-
-    Terminal 1 (Laravel Server):
-
+5.  **Jalankan Aplikasi**
     ```bash
+    npm run dev
+    # Buka terminal baru
     php artisan serve
     ```
 
-    Terminal 2 (Vite Build Watch):
+---
 
-    ```bash
-    npm run dev
-    ```
+## 🔐 Akun Demo
 
-8.  **Akses Aplikasi**
-    Buka browser dan kunjungi: `http://127.0.0.1:8000`
+Gunakan akun berikut untuk masuk ke sistem:
 
-## 📄 Lisensi
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Administrator** | `admin@kampus.com` | `password` |
+| **Staff Logistik** | `staff@kampus.com` | `password` |
 
-Project ini bersifat open-source dan dilisensikan di bawah [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 👨‍💻 Pengembang
+
+Dikembangkan sebagai Tugas Akhir / Proyek Mata Kuliah.
+
+* **Nama:** M. Oriza saltifa
+* **NIM:** 24210099
+* **Kampus:** UBBG
+
+---
+
+> **Catatan:** Sistem ini dibuat dengan pendekatan *Clean Code* dan *Database Normalization* untuk memastikan integritas data jangka panjang.
