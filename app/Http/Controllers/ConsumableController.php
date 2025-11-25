@@ -119,4 +119,21 @@ class ConsumableController extends Controller
 
         return back()->with('success', 'Batch berhasil ditambahkan. Kode: ' . $code);
     }
+
+    // FORM TAMBAH BHP
+    public function create(Category $category)
+    {
+        return view('pages.consumables.create', compact('category'));
+    }
+
+    // HALAMAN FORM TAMBAH BATCH (STOK BARU)
+    public function createBatch(Consumable $consumable)
+    {
+        // Ambil data master untuk dropdown
+        $rooms = Room::with('unit')->get();
+        $fundings = FundingSource::all();
+
+        return view('pages.consumables.create_batch', compact('consumable', 'rooms', 'fundings'));
+    }
+    
 }

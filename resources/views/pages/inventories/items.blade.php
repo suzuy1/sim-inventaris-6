@@ -4,26 +4,16 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
-            <div class="bg-white p-6 rounded-lg shadow mb-6">
-                <form action="{{ route('inventaris.store') }}" method="POST" class="flex gap-4 items-end">
-                    @csrf
-                    <input type="hidden" name="category_id" value="{{ $category->id }}">
-                    
-                    <div class="flex-1">
-                        <label class="block text-sm font-bold text-gray-700">Nama Barang / Aset</label>
-                        <input type="text" name="name" placeholder="Cth: Laptop Acer Aspire" class="w-full border-gray-300 rounded focus:ring-blue-500">
-                    </div>
-                    
-                    <div class="flex-[2]">
-                        <label class="block text-sm font-bold text-gray-700">Keterangan Singkat</label>
-                        <input type="text" name="description" placeholder="Opsional" class="w-full border-gray-300 rounded focus:ring-blue-500">
-                    </div>
-
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700 mb-0.5">
-                        + Simpan
-                    </button>
-                </form>
-            </div>
+            <div class="flex justify-between items-center mb-6">
+    <div>
+        <h3 class="text-lg font-bold text-gray-800">Daftar Aset: {{ $category->name }}</h3>
+        <p class="text-sm text-gray-500">Kelola data induk aset tetap di kategori ini.</p>
+    </div>
+    <a href="{{ route('inventaris.create', $category->id) }}" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-bold hover:bg-blue-700 shadow transition flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+        Tambah Aset Baru
+    </a>
+</div>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500">

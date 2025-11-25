@@ -3,25 +3,16 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
-            <div class="bg-white p-6 rounded mb-6 shadow">
-                <form action="{{ route('bhp.store') }}" method="POST" class="flex gap-4 items-end">
-                    @csrf
-                    <input type="hidden" name="category_id" value="{{ $category->id }}">
-                    <div class="flex-1">
-                        <label class="font-bold text-xs">Nama Barang</label>
-                        <input type="text" name="name" class="w-full border-gray-300 rounded" required>
-                    </div>
-                    <div class="w-32">
-                        <label class="font-bold text-xs">Satuan</label>
-                        <input type="text" name="unit" placeholder="Box/Pcs" class="w-full border-gray-300 rounded" required>
-                    </div>
-                    <div class="flex-1">
-                        <label class="font-bold text-xs">Keterangan</label>
-                        <input type="text" name="notes" class="w-full border-gray-300 rounded">
-                    </div>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded font-bold">+ Simpan</button>
-                </form>
-            </div>
+          <div class="flex justify-between items-center mb-6">
+    <div>
+        <h3 class="text-lg font-bold text-gray-800">Stok Gudang: {{ $category->name }}</h3>
+        <p class="text-sm text-gray-500">Kelola item dan monitoring kadaluarsa.</p>
+    </div>
+    <a href="{{ route('bhp.create', $category->id) }}" class="bg-green-600 text-white px-5 py-2.5 rounded-lg font-bold hover:bg-green-700 shadow transition flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+        Registrasi Item Baru
+    </a>
+</div>
 
             <div class="bg-white shadow rounded-lg overflow-hidden">
                 <table class="w-full text-sm text-left text-gray-500">

@@ -43,4 +43,9 @@ class InventoryController extends Controller
         return redirect()->route('asset.index', $inventory->id)
             ->with('success', 'Barang induk dibuat. Silakan input unit fisiknya di bawah ini.');
     }
+    // HALAMAN FORM TAMBAH BARANG (BARU)
+    public function create(Category $category)
+    {
+        return view('pages.inventories.create', compact('category'));
+    }
 }

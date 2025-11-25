@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     // Halaman Kategori
     Route::get('/inventaris', [InventoryController::class, 'indexCategories'])->name('inventaris.categories');
     // Daftar Barang per Kategori
+    // Form Create Inventaris (Menerima parameter category)
+    Route::get('/inventaris/create/{category}', [InventoryController::class, 'create'])->name('inventaris.create');
     Route::get('/inventaris/kategori/{category}', [InventoryController::class, 'indexItems'])->name('inventaris.items');
     // Simpan Barang Induk
     Route::post('/inventaris/store', [InventoryController::class, 'store'])->name('inventaris.store');
@@ -53,6 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/asset/{assetDetail}', [AssetDetailController::class, 'destroy'])->name('asset.destroy');
 
     // --- 3. BARANG HABIS PAKAI / BHP (Obat, ATK) ---
+    Route::get('/bhp/create/{category}', [ConsumableController::class, 'create'])->name('bhp.create');
+    // Tambahkan di bagian // --- 3. BARANG HABIS PAKAI / BHP ---
+    Route::get('/bhp/create-batch/{consumable}', [ConsumableController::class, 'createBatch'])->name('consumable.createBatch');
     Route::get('/bhp', [ConsumableController::class, 'indexCategories'])->name('bhp.categories');
     Route::get('/bhp/kategori/{category}', [ConsumableController::class, 'indexItems'])->name('bhp.items');
     Route::post('/bhp/store', [ConsumableController::class, 'store'])->name('bhp.store');

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">Catat Pengambilan Barang (Barang Keluar)</x-slot>
+    <x-slot name="header">Catat Pengambilan Barang (FIFO)</x-slot>
 
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
@@ -8,23 +8,33 @@
                 <form action="{{ route('transaksi.store') }}" method="POST">
                     @csrf
                     
+                    @if ($errors->any())
+                        <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                            <strong class="font-bold">Terjadi Kesalahan!</strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="mb-4">
-                        <label class="block font-bold text-sm mb-2">Pilih Batch Barang</label>
-                        <select name="consumable_detail_id" class="w-full border-gray-300 rounded focus:ring-red-500" required>
-                            <option value="">-- Pilih Barang & Batch --</option>
+                        <label class="block font-bold text-sm mb-2">Pilih Barang (BHP)</label>
+                        
+                        <select name="consumable_id" class="w-full border-gray-300 rounded focus:ring-red-500" required>
+                            <option value="">-- Cari Nama Barang --</option>
                             @foreach($consumables as $item)
-                                <optgroup label="{{ $item->name }} (Total: {{ $item->details->sum('current_stock') }} {{ $item->unit }})">
-                                    @foreach($item->details as $batch)
-                                        @if($batch->current_stock > 0)
-                                        <option value="{{ $batch->id }}">
-                                            Kode: {{ $batch->batch_code }} | Sisa: {{ $batch->current_stock }} | Exp: {{ $batch->expiry_date ?? '-' }}
-                                        </option>
-                                        @endif
-                                    @endforeach
-                                </optgroup>
+                                @php $totalStock = $item->details->sum('current_stock'); @endphp
+                                
+                                @if($totalStock > 0)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->name }} (Total Stok: {{ $totalStock }} {{ $item->unit }})
+                                </option>
+                                @endif
                             @endforeach
                         </select>
-                        <p class="text-xs text-gray-500 mt-1">*Hanya batch dengan stok > 0 yang tampil.</p>
+                        <p class="text-xs text-gray-500 mt-1">Sistem otomatis mengambil stok dari batch terlama (FIFO).</p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 mb-4">
@@ -44,7 +54,7 @@
                     </div>
 
                     <div class="flex justify-end">
-                        <button class="bg-red-600 text-white px-6 py-2 rounded font-bold hover:bg-red-700">
+                        <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded font-bold hover:bg-red-700">
                             Simpan Transaksi Keluar
                         </button>
                     </div>
